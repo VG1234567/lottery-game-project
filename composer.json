@@ -9,6 +9,7 @@
         "flipbox/lumen-generator": "^9.2",
         "illuminate/mail": "*",
         "laravel/lumen-framework": "^10.0",
+        "spatie/laravel-permission": "^5.9",
         "tymon/jwt-auth": "^2.0"
     },
     "require-dev": {

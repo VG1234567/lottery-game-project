@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->unsignedBigInteger('game_id');
-            $table->foreign('game_id')->references('id')->on('lottery_games');
+            //$table->unsignedBigInteger('game_id');
+          //  $table->foreign('game_id')->references('id')->on('lottery_games');
+            $table->foreignId('lottery_game_id')->constrained('lottery_games');
 
             $table->date('start_date');
-            $table->dateTime('start_time');
-            $table->unsignedBigInteger('winner_id');
+            $table->time('start_time');
+            $table->unsignedBigInteger('winner_id')->nullable();
+            $table->foreign('winner_id')->references('id')->on('users');
             $table->boolean('is_finished')->default(false);
         });
     }

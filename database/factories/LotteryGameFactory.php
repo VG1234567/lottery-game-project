@@ -13,7 +13,7 @@ class LotteryGameFactory extends Factory
     {
     	return [
             'name' => $this->faker->name,
-            'gamer_count' => random_int(0,1000),
+            'gamer_count' => random_int(1,100),
             'reward_points' => random_int(0,1000),
     	];
     }

@@ -15,7 +15,9 @@ class LotteryGameMatchResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'game_id'=>$this->game_id,
+            'start_date'=>$this->start_date,
+            'start_time'=>$this->start_time,
+            'lottery_game_id'=>$this->lottery_game_id,
         ];
     }
 }

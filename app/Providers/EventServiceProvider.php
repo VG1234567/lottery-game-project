@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Laravel\Lumen\Providers\EventServiceProvider as ServiceProvider;
+use app\Events\OneUserOneMatch;
+use app\Listeners\BanRecordTwice;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         \App\Events\ExampleEvent::class => [
             \App\Listeners\ExampleListener::class,
+        ],
+        OneUserOneMatch::class => [
+            BanRecordTwice::class,
         ],
     ];
 

@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             //$table->foreign('id')->references('winner_id')->on('lottery_game_matches');
-            // $table->foreignId('id')->constrained('lottery_game_matches');
+           // $table->foreignId('id')->constrained('lottery_game_matches');
             $table->timestamps();
 
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('is_admin')->default(false);
             $table->integer('points')->unsigned()->nullable();
         });
     }

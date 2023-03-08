@@ -13,8 +13,12 @@ class LotteryGameMatch extends Model
     use Authenticatable, Authorizable, HasFactory;
 
     protected $fillable = [
-        'start_date', 'start_time',
+        'start_date','start_time',
     ];
+
+    public static function table(string $string)
+    {
+    }
 
     public function lottery_games()
     {

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 class LotteryGameMatchUserController extends Controller
 {
 
+    public function index(){
+        return 'aaaaaaaaa';
+    }
+
+
     public function store(Request $request)
     {
 
