@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Models\LotteryGameMatchUser;
+
 class OneUserOneMatch extends Event
 {
     /**
@@ -9,8 +11,12 @@ class OneUserOneMatch extends Event
      *
      * @return void
      */
-    public function __construct()
+
+    public $string;
+
+    public function __construct($string)
     {
-        //
+        $this->string = $string;
     }
+
 }

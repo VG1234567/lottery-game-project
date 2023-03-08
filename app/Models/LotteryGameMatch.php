@@ -16,23 +16,14 @@ class LotteryGameMatch extends Model
         'start_date','start_time',
     ];
 
-    public static function table(string $string)
-    {
-    }
-
     public function lottery_games()
     {
-        return $this->belongsTo(LotteryGame::class);
+        return $this->belongsTo(LotteryGame::class,'lottery_game_id','id');
     }
 
     public function lottery_game_match_users()
     {
-        return $this->hasMany(LotteryGameMatchUser::class);
-    }
-
-    public function users()
-    {
-        return $this->hasMany(User::class);
+        return $this->hasMany(LotteryGameMatchUser::class,'lottery_game_match_id','id');
     }
 
 }

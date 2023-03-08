@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OneUserOneMatch;
 use App\Models\LotteryGameMatchUser;
 use Illuminate\Http\Request;
 
 class LotteryGameMatchUserController extends Controller
 {
 
-    public function index(){
-        return 'aaaaaaaaa';
-    }
-
-
     public function store(Request $request)
     {
-
         //validation
         $this->validate($request, [
             'user_id' => 'required',
@@ -28,6 +23,8 @@ class LotteryGameMatchUserController extends Controller
         $lottery_game_match_user->lottery_game_match_id = $request->input('lottery_game_match_id');
 
         $lottery_game_match_user->save();
+
+       // event(new OneUserOneMatch($lottery_game_match_user));
 
         return response()->json($lottery_game_match_user);
     }

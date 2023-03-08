@@ -54,5 +54,4 @@ class LotteryGameMatchController extends Controller
 
         return response()->json($lottery_game_match);
     }
-
 }

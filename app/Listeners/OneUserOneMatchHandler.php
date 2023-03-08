@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\OneUserOneMatch;
 
-class BanRecordTwice
+class OneUserOneMatchHandler
 {
     /**
      * Create the event listener.
@@ -24,6 +24,6 @@ class BanRecordTwice
      */
     public function handle(OneUserOneMatch $event)
     {
-        //
+        echo $event->string;
     }
 }

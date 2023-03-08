@@ -17,7 +17,7 @@ class LotteryGame extends Model
 
     public function lottery_game_matches()
     {
-        return $this->hasMany(LotteryGameMatch::class);
+        return $this->hasMany(LotteryGameMatch::class, 'lottery_game_id','id');
     }
 
 }

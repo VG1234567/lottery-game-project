@@ -2,6 +2,7 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use App\Events\Event;
 use \App\Http\Controllers\LotteryGameMatchController;
 
 /*
@@ -19,6 +20,7 @@ use \App\Http\Controllers\LotteryGameMatchController;
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
 $router->group(['prefix'=>'api'],function () use ($router){
     $router->post('/users/register', 'AuthController@register');
     $router->post('/users/login', 'AuthController@login');

@@ -32,34 +32,22 @@ class User extends Model implements JWTSubject, AuthenticatableContract,Authoriz
     protected $fillable = [
         'first_name','last_name', 'email',
     ];
+
     protected $hidden = [
         'password',
     ];
+
     public function lottery_game_match_users()
     {
-        return $this->hasMany(LotteryGameMatchUser::class);
+        return $this->hasMany(LotteryGameMatchUser::class,'user_id','id');
     }
 
-    public function lottery_game_matches()
-    {
-        return $this->belongsTo(LotteryGameMatch::class);
-    }
 
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
 
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
     public function getJWTCustomClaims()
     {
         return [];

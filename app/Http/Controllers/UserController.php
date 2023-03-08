@@ -10,19 +10,21 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
 
-
-    public function destroy($id){
+    public function destroy($id)
+    {
         $user = User::find($id);
         $user -> delete();
         return response()->json("User deleted successfully!");
     }
 
-    public function index(){
+    public function index()
+    {
         $users = UserResource::collection(User::all());
         return response()->json($users);
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request,$id)
+    {
         //validation
         $this->validate($request, [
             'first_name' => 'required|string',

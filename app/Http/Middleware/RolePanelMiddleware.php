@@ -15,9 +15,9 @@ class RolePanelMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->role !== 0){
+        if(auth()->user()->role !== 0)
+        {
             return redirect()->route('/');
-
         }
 
         // Pre-Middleware Action
