@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
-class RolePanelMiddleware
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -15,17 +16,10 @@ class RolePanelMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->role !== 0)
-        {
-            return redirect()->route('/');
+
+        if(!Auth::user()->isAdmin()){
+            return $next($request);
         }
-
-        // Pre-Middleware Action
-
-        $response = $next($request);
-
-        // Post-Middleware Action
-
-        return $response;
+        return redirect('/');
     }
 }

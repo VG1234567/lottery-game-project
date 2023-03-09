@@ -80,7 +80,7 @@ $app->middleware([
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
-    'RolePanel' => App\Http\Middleware\RolePanelMiddleware::class,
+    'isadmin' => App\Http\Middleware\CheckRole::class,
 ]);
 
 /*

@@ -15,26 +15,16 @@ class User extends Model implements JWTSubject, AuthenticatableContract,Authoriz
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    const ROLE_ADMIN = 0;
-    const ROLE_GUEST = 1;
-    const ROLE_USER = 2;
-
-    public static function getRole()
-    {
-        return [
-            self::ROLE_ADMIN => 'Админ',
-            self::ROLE_GUEST => 'Гость',
-            self::ROLE_USER => 'Авторизованный пользователь',
-        ];
-
-    }
-
     protected $fillable = [
         'first_name','last_name', 'email',
     ];
 
     protected $hidden = [
-        'password',
+        'password','remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 
     public function lottery_game_match_users()
@@ -51,6 +41,11 @@ class User extends Model implements JWTSubject, AuthenticatableContract,Authoriz
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function isAdmin()
+    {
+        return $this->is_admin === 1;
     }
 
 }

@@ -14,9 +14,8 @@ class LotteryGameController extends Controller
 
     public function index(){
 
-        $lottery_games = LotteryGame::find(1);
-        $lottery_game_match = LotteryGameMatch::where('lottery_game_id',$lottery_games->id)->get();
-        return response()->json($lottery_game_match);
+        $lottery_games = LotteryGameResource::collection(LotteryGame::all());
+        return response()->json($lottery_games);
 
     }
 
