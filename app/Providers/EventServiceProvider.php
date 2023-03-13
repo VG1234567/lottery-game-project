@@ -2,9 +2,14 @@
 
 namespace App\Providers;
 
-use App\Listeners\OneUserOneMatchHandler;
+use App\Events\LotteryGameMatchAddPointsEvent;
+use App\Events\LotteryGameMatchEvent;
+use App\Events\LotteryGameMatchUserEvent;
+use App\Listeners\LotteryGameMatchAddPoints;
+use App\Listeners\LotteryGameMatchUserCount;
+use App\Listeners\LotteryGameMatchUserRecording;
+use App\Listeners\LotteryGameMatchWinner;
 use Laravel\Lumen\Providers\EventServiceProvider as ServiceProvider;
-use app\Events\OneUserOneMatch;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -12,13 +17,20 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\ExampleEvent::class => [
             \App\Listeners\ExampleListener::class,
         ],
-        OneUserOneMatch::class => [
-            OneUserOneMatchHandler::class,
+        LotteryGameMatchUserEvent::class => [
+            LotteryGameMatchUserRecording::class,
+            LotteryGameMatchUserCount::class,
+        ],
+        LotteryGameMatchEvent::class => [
+            LotteryGameMatchWinner::class,
+        ],
+        LotteryGameMatchAddPointsEvent::class => [
+            LotteryGameMatchAddPoints::class,
         ],
     ];
 
     public function shouldDiscoverEvents()
     {
-        return true;
+        return false;
     }
 }

@@ -12,19 +12,21 @@ class LotteryGameMatchUserController extends Controller
     public function store(Request $request)
     {
         //validation
+
         $this->validate($request, [
             'user_id' => 'required',
             'lottery_game_match_id' => 'required',
         ]);
 
-        $lottery_game_match_user = new LotteryGameMatchUser();
+        $user_id = $request->input('user_id');
+        $lottery_game_match_id = $request->input('lottery_game_match_id');
 
-        $lottery_game_match_user->user_id = $request->input('user_id');
-        $lottery_game_match_user->lottery_game_match_id = $request->input('lottery_game_match_id');
+        $lottery_game_match_user = LotteryGameMatchUser::create([
+            'user_id' => $user_id,
+            'lottery_game_match_id' => $lottery_game_match_id,
+        ]);
 
         $lottery_game_match_user->save();
-
-       // event(new OneUserOneMatch($lottery_game_match_user));
 
         return response()->json($lottery_game_match_user);
     }

@@ -20,4 +20,19 @@ class LotteryGame extends Model
         return $this->hasMany(LotteryGameMatch::class, 'lottery_game_id','id');
     }
 
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getGamerCount()
+    {
+        return $this->gamer_count;
+    }
+
+    public function rewardPoints()
+    {
+        return $this->reward_points;
+    }
+
 }

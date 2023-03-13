@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\LotteryGameMatchUserEvent;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ class LotteryGameMatchUser extends Model
     use Authenticatable, Authorizable, HasFactory;
 
     protected $fillable = [
-        'user_id', 'lottery_game_match_id',
+        'user_id', 'lottery_game_match_id', 'id',
     ];
 
     public function lottery_game_matches()
@@ -25,5 +26,24 @@ class LotteryGameMatchUser extends Model
     {
         return $this->belongsTo(User::class,'user_id','id');
     }
+
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    public function getLotteryGameMatchId()
+    {
+        return $this->lottery_game_match_id;
+    }
+
+    public function getLotteryGameMatchUserId()
+    {
+        return $this->id;
+    }
+
+    protected $dispatchesEvents = [
+        'saving' => LotteryGameMatchUserEvent::class,
+    ];
 
 }

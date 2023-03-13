@@ -6,6 +6,7 @@ use App\Events\Event;
 use App\Http\Controllers\AuthController;
 use \App\Http\Controllers\LotteryGameMatchController;
 use FastRoute\Route;
+use \App\Events\OneUserOneMatch;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,9 @@ use FastRoute\Route;
 
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+   //  event(new OneUserOneMatch('aaaaaaaaaa'));
+   return $router->app->version();
+  //  Event::dispatch(new \App\Events\OneUserOneMatch());
 });
 //Guest
 $router->group(['prefix'=>'api'],function () use ($router){
@@ -28,21 +31,23 @@ $router->group(['prefix'=>'api'],function () use ($router){
     $router->post('/users/login', 'AuthController@login');
     $router->get('/lottery_games', 'LotteryGameController@index');
     $router->get('/lottery_game_match/{lottery_game_id}', 'LotteryGameMatchController@index');
+    $router->get('/users', 'UserController@index');
 });
 //Admin
 $router->group(['middleware' => ['auth','isadmin'], 'prefix' => 'api'],function () use ($router){
-    $router->get('/lottery_games', 'LotteryGameController@index');
+   // $router->get('/lottery_games', 'LotteryGameController@index');
     $router->post('/lottery_game_matches', 'LotteryGameMatchController@store');
     $router->put('/lottery_game_matches/{lottery_game_id}', 'LotteryGameMatchController@update');
-    $router->get('/lottery_game_match/{lottery_game_id}', 'LotteryGameMatchController@index');
-    $router->get('/users', 'UserController@index');
+    $router->post('/lottery_game_match_users', 'LotteryGameMatchUserController@store');
+    //$router->get('/lottery_game_match/{lottery_game_id}', 'LotteryGameMatchController@index');
+   /// $router->get('/users', 'UserController@index');
 });
 //Authorized user
 $router->group(['middleware' => 'auth', 'prefix' => 'api'],function () use ($router){
     $router->put('/users/{id}', 'UserController@update');
     $router->delete('/users/delete/{id}', 'UserController@destroy');
-    $router->get('/lottery_games', 'LotteryGameController@index');
-    $router->post('/lottery_game_matches', 'LotteryGameMatchController@store');
-    $router->get('/lottery_game_match/{lottery_game_id}', 'LotteryGameMatchController@index');
+  //  $router->get('/lottery_games', 'LotteryGameController@index');
+    $router->post('/lottery_game_match_users', 'LotteryGameMatchUserController@store');
+  //  $router->get('/lottery_game_match/{lottery_game_id}', 'LotteryGameMatchController@index');
 });
 
