@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            //$table->foreign('id')->references('winner_id')->on('lottery_game_matches');
-           // $table->foreignId('id')->constrained('lottery_game_matches');
             $table->timestamps();
 
             $table->string('first_name');

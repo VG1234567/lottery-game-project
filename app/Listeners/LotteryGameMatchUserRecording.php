@@ -27,7 +27,9 @@ class LotteryGameMatchUserRecording
     public function handle(LotteryGameMatchUserEvent $event)
     {
         $user_id = $event->LotteryGameMatchUser->getUserId();
+
         $lottery_game_match_id = $event->LotteryGameMatchUser->getLotteryGameMatchId();
+
         $recording = DB::table('lottery_game_match_users')->where([
            ['user_id','=',$user_id],
            ['lottery_game_match_id','=',$lottery_game_match_id],

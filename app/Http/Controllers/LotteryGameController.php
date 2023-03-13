@@ -13,10 +13,8 @@ class LotteryGameController extends Controller
 {
 
     public function index(){
-
-        $lottery_games = LotteryGameResource::collection(LotteryGame::all());
+        $lottery_games = LotteryGame::with('lottery_game_matches')->get();
+      //  $lottery_games = $lottery_games->sortBy('start_date');
         return response()->json($lottery_games);
-
     }
-
 }

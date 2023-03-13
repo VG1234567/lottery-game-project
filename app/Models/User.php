@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Laravel\Lumen\Auth\Authorizable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -34,6 +32,10 @@ class User extends Model implements JWTSubject, AuthenticatableContract,Authoriz
         return $this->hasMany(LotteryGameMatchUser::class,'user_id','id');
     }
 
+    public function lottery_game_matches()
+    {
+        return $this->hasMany(LotteryGameMatch::class,'winner_id','id');
+    }
 
     public function getJWTIdentifier()
     {
@@ -49,6 +51,5 @@ class User extends Model implements JWTSubject, AuthenticatableContract,Authoriz
     {
         return $this->is_admin === 1;
     }
-
 
 }

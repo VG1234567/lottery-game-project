@@ -4,12 +4,9 @@ namespace App\Models;
 
 use App\Events\LotteryGameMatchAddPointsEvent;
 use App\Events\LotteryGameMatchEvent;
-use App\Listeners\LotteryGameMatchWinner;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Laravel\Lumen\Auth\Authorizable;
 
 class LotteryGameMatch extends Model
@@ -29,6 +26,11 @@ class LotteryGameMatch extends Model
     public function lottery_game_match_users()
     {
         return $this->hasMany(LotteryGameMatchUser::class,'lottery_game_match_id','id');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class,'winner_id','id');
     }
 
     public function getLotteryGameId()

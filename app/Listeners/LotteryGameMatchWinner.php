@@ -27,18 +27,18 @@ class LotteryGameMatchWinner
     {
 
         $lottery_game_match_id =  $event->LotteryGameMatch-> getLotteryGameMatchId();
+
         $recordedUser = LotteryGameMatchUser::query()->where(
             'lottery_game_match_id', '=', $lottery_game_match_id
         )->get();
 
         foreach ($recordedUser as $record) {
-            $userIds[] = $record->getUserId();
+            $userId[] = $record->getUserId();
         }
-        $winnerIdKey = array_rand($userIds,1);
+        $winnerIdKey = array_rand($userId,1);
 
-        $winnerId = $userIds[$winnerIdKey];
+        $winnerId = $userId[$winnerIdKey];
 
         $event->LotteryGameMatch['winner_id'] = $winnerId;
-
     }
 }

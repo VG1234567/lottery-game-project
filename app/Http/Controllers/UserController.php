@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
+use App\Models\LotteryGameMatch;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +20,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = UserResource::collection(User::all());
+        $users = User::with('lottery_game_matches')->get();
         return response()->json($users);
-
     }
 
     public function update(Request $request,$id)

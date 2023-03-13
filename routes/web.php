@@ -19,12 +19,10 @@ use \App\Events\OneUserOneMatch;
 |
 */
 
-
 $router->get('/', function () use ($router) {
-   //  event(new OneUserOneMatch('aaaaaaaaaa'));
    return $router->app->version();
-  //  Event::dispatch(new \App\Events\OneUserOneMatch());
 });
+
 //Guest
 $router->group(['prefix'=>'api'],function () use ($router){
     $router->post('/users/register', 'AuthController@register');
@@ -33,21 +31,18 @@ $router->group(['prefix'=>'api'],function () use ($router){
     $router->get('/lottery_game_match/{lottery_game_id}', 'LotteryGameMatchController@index');
     $router->get('/users', 'UserController@index');
 });
+
 //Admin
 $router->group(['middleware' => ['auth','isadmin'], 'prefix' => 'api'],function () use ($router){
-   // $router->get('/lottery_games', 'LotteryGameController@index');
     $router->post('/lottery_game_matches', 'LotteryGameMatchController@store');
     $router->put('/lottery_game_matches/{lottery_game_id}', 'LotteryGameMatchController@update');
     $router->post('/lottery_game_match_users', 'LotteryGameMatchUserController@store');
-    //$router->get('/lottery_game_match/{lottery_game_id}', 'LotteryGameMatchController@index');
-   /// $router->get('/users', 'UserController@index');
 });
+
 //Authorized user
 $router->group(['middleware' => 'auth', 'prefix' => 'api'],function () use ($router){
     $router->put('/users/{id}', 'UserController@update');
     $router->delete('/users/delete/{id}', 'UserController@destroy');
-  //  $router->get('/lottery_games', 'LotteryGameController@index');
     $router->post('/lottery_game_match_users', 'LotteryGameMatchUserController@store');
-  //  $router->get('/lottery_game_match/{lottery_game_id}', 'LotteryGameMatchController@index');
 });
 
