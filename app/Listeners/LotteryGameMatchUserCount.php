@@ -7,6 +7,8 @@ use App\Models\LotteryGame;
 use App\Models\LotteryGameMatch;
 use App\Models\LotteryGameMatchUser;
 use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Exception;
+use Psy\Exception\ErrorException;
 
 class LotteryGameMatchUserCount
 {
@@ -28,6 +30,7 @@ class LotteryGameMatchUserCount
      */
     public function handle(LotteryGameMatchUserEvent $event)
     {
+
         $lottery_game_match_id = $event->LotteryGameMatchUser->getLotteryGameMatchId();
 
         $match =  LotteryGameMatch::query()->find($lottery_game_match_id);
@@ -42,8 +45,16 @@ class LotteryGameMatchUserCount
             ->where('lottery_game_match_id', '=', $lottery_game_match_id)
             ->count();
 
-        if ($countMatches >= $gamer_count) {
-            return false;
+
+        try {
+            if ($countMatches >= $gamer_count) {
+                throw new \Exception('You have exceeded the required number of players! Sign up for the next match');
+            }
+        }catch (\Exception $e)
+        {
+            echo $e->getMessage();
+            die();
         }
+
     }
 }

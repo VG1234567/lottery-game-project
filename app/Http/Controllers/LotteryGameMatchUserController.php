@@ -18,13 +18,10 @@ class LotteryGameMatchUserController extends Controller
             'lottery_game_match_id' => 'required',
         ]);
 
-        $user_id = $request->input('user_id');
-        $lottery_game_match_id = $request->input('lottery_game_match_id');
+        $lottery_game_match_user = new LotteryGameMatchUser();
 
-        $lottery_game_match_user = LotteryGameMatchUser::create([
-            'user_id' => $user_id,
-            'lottery_game_match_id' => $lottery_game_match_id,
-        ]);
+        $lottery_game_match_user->user_id = $request->input('user_id');
+        $lottery_game_match_user->lottery_game_match_id = $request->input('lottery_game_match_id');
 
         $lottery_game_match_user->save();
 

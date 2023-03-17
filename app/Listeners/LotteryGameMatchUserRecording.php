@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\LotteryGameMatchUserEvent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use mysql_xdevapi\Exception;
 
 class LotteryGameMatchUserRecording
 {
@@ -35,8 +36,16 @@ class LotteryGameMatchUserRecording
            ['lottery_game_match_id','=',$lottery_game_match_id],
         ])->first();
 
-        if (!empty($recording)) {
-            return false;
+
+        try {
+            if (!empty($recording)) {
+                throw new \Exception('You have already signed up for this match!');
+            }
+        }catch (\Exception $e)
+        {
+            echo $e->getMessage();
+            die();
         }
+
     }
 }

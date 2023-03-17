@@ -14,7 +14,7 @@ class LotteryGameMatchUser extends Model
     use Authenticatable, Authorizable, HasFactory;
 
     protected $fillable = [
-        'user_id', 'lottery_game_match_id', 'id',
+        'user_id', 'lottery_game_match_id',
     ];
 
     public function lottery_game_matches()
@@ -43,7 +43,7 @@ class LotteryGameMatchUser extends Model
     }
 
     protected $dispatchesEvents = [
-        'saving' => LotteryGameMatchUserEvent::class,
+        'creating' => LotteryGameMatchUserEvent::class,
     ];
 
 }
